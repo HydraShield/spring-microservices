@@ -2,7 +2,7 @@ FROM openjdk:17-oracle
 
 WORKDIR /microservices-application
 
-COPY service-1/target/service-1-0.0.1.jar /microservices-application/service-1.jar
+COPY target/service-1-0.0.1.jar /microservices-application/service-1.jar
 
 EXPOSE 8080
 

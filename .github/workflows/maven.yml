@@ -51,6 +51,8 @@ jobs:
 
       - name: Build and push Docker images
         run: |
+          ls service-1/
+          ls service-1/target/
           docker build -t hydrashield/service-1:latest -f service-1/Dockerfile .
           docker push hydrashield/service-1:latest
 

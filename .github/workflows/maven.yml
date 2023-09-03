@@ -35,12 +35,12 @@ jobs:
 
       - name: Build Service 2 with Maven
         run: |
-          cd ../service-2
+          cd ./service-2
           mvn clean install
 
       - name: Build Service 3 with Maven
         run: |
-          cd ../service-3
+          cd ./service-3
           mvn clean install
 
 #  deploy:

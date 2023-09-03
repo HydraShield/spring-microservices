@@ -39,9 +39,9 @@ jobs:
         
         cd ..
         mkdir artifacts
-        cp ./service-1/*.jar ./artifacts/
-        cp ./service-2/*.jar ./artifacts/
-        cp ./service-3/*.jar ./artifacts/
+        cp ./service-1/target/*.jar ./artifacts/
+        cp ./service-2/target/*.jar ./artifacts/
+        cp ./service-3/target/*.jar ./artifacts/
 
   deploy:
     needs: build

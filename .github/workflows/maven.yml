@@ -36,6 +36,11 @@ jobs:
 
         cd ../service-3
         mvn clean install
+        
+        ls ../service-1
+        ls ../service-2
+        ls ../service-3
+        
 
   deploy:
     needs: build
@@ -51,8 +56,6 @@ jobs:
 
       - name: Build and push Docker images
         run: |
-          ls service-1/
-          ls service-1/target/
           docker build -t hydrashield/service-1:latest -f service-1/Dockerfile .
           docker push hydrashield/service-1:latest
 

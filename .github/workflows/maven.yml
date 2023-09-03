@@ -37,10 +37,11 @@ jobs:
         cd ../service-3
         mvn clean install
         
-        ls ../service-1
-        ls ../service-2
-        ls ../service-3
-        
+        cd ..
+        mkdir artifacts
+        cp ./service-1/*.jar ./artifacts/
+        cp ./service-2/*.jar ./artifacts/
+        cp ./service-3/*.jar ./artifacts/
 
   deploy:
     needs: build

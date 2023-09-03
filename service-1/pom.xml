@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.hydrashield.microservices</groupId>
 	<artifactId>service-1</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>service-1</name>
 	<description>Demo project for Spring Boot Microservice: Service-1</description>
 	<properties>

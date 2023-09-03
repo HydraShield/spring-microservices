@@ -16,7 +16,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -37,3 +36,49 @@ jobs:
 
         cd ../service-3
         mvn clean install
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Run unit tests
+        run: |
+          cd ./service-1
+          mvn test
+            
+          cd ../service-2
+          mvn test
+            
+          cd ../service-3
+          mvn test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker images
+        run: |
+          docker build -t service-1:latest -f Dockerfile ./service-1/.
+          docker push service-1:latest
+
+          docker build -t service-2:latest -f Dockerfile ./service-2/.
+          docker push service-2:latest
+
+          docker build -t service-3:latest -f Dockerfile ./service-3/.
+          docker push service-3:latest

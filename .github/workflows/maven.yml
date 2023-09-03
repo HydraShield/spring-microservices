@@ -75,10 +75,10 @@ jobs:
       - name: Build and push Docker images
         run: |
           docker build -t service-1:latest -f Dockerfile ./service-1/.
-          docker push service-1:latest
+          docker push hydrashield/microservices/service-1:latest
 
           docker build -t service-2:latest -f Dockerfile ./service-2/.
-          docker push service-2:latest
+          docker push hydrashield/microservices/service-2:latest
 
           docker build -t service-3:latest -f Dockerfile ./service-3/.
-          docker push service-3:latest
+          docker push hydrashield/microservices/service-3:latest

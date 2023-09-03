@@ -39,14 +39,28 @@ jobs:
         cd ../service-3
         mvn clean install
 
+    - name: Archive generated JAR
+      uses: actions/upload-artifact@v3
+      with:
+        name: artifacts
+        path: |
+          ./service-1/target/*.jar
+          ./service-2/target/*.jar
+          ./service-3/target/*.jar
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
+      - name: Download JAR files
+        uses: actions/download-artifact@v3
+        with:
+          name: artifacts
+          path: ./artifacts
       - name: Set up Docker
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
 
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}

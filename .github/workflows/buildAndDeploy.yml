@@ -49,6 +49,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
+          distribution: 'temurin'
           cache: maven
 
       - name: Build ${{ inputs.service-name }} with Maven and Push Docker Image to ECR

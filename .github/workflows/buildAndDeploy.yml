@@ -44,10 +44,10 @@ jobs:
           java-version: '17'
           cache: maven
 
-      - name: Build ${{ service-name }} with Maven and Push Docker Image to ECR
+      - name: Build ${{ service-directory }} with Maven and Push Docker Image to ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: ${{ service-name }}-latest
+          IMAGE_TAG: ${{ service-directory }}-latest
         run: |
           cd ${{ service-directory }}
           mvn clean install

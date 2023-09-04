@@ -11,52 +11,22 @@ env:
 
 jobs:
   build-deploy-service-1:
-    runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.modified, 'service-1/') || contains(github.event.head_commit.modified, '.github/')
-
-    steps:
-      - uses: ./.github/common-config/common-step.yml
-
-      - name: Build Service 1 with Maven and Push Docker Image to ECR
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: service-1-latest
-        run: |
-          cd ./service-1
-          mvn clean install
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    if: contains(github.event.head_commit.modified, 'service-1/') || contains(github.event.head_commit.modified, '.github/workflows/')
+    uses: ./.github/workflows/buildAndDeploy
+    with:
+      service-name: service-1
+      service-directory: service-1
 
   build-deploy-service-2:
-    runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.modified, 'service-2/') || contains(github.event.head_commit.modified, '.github/')
-
-    steps:
-      - uses: ../common-config/common-step.yml
-
-      - name: Build Service 2 with Maven and Push Docker Image to ECR
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: service-2-latest
-        run: |
-          cd ./service-2
-          mvn clean install
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    if: contains(github.event.head_commit.modified, 'service-2/') || contains(github.event.head_commit.modified, '.github/workflows/')
+    uses: ./.github/workflows/buildAndDeploy
+    with:
+      service-name: service-2
+      service-directory: service-2
 
   build-deploy-service-3:
-    runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.modified, 'service-3/') || contains(github.event.head_commit.modified, '.github/')
-
-    steps:
-      - uses: ../common-config/common-step.yml
-
-      - name: Build Service 3 with Maven and Push Docker Image to ECR
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: service-3-latest
-        run: |
-          cd ./service-3
-          mvn clean install
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    if: contains(github.event.head_commit.modified, 'service-2/') || contains(github.event.head_commit.modified, '.github/workflows/')
+    uses: ./.github/workflows/buildAndDeploy
+    with:
+      service-name: service-3
+      service-directory: service-3

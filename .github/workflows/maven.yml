@@ -11,21 +11,21 @@ env:
 
 jobs:
   build-deploy-service-1:
-    if: contains(github.event.head_commit.modified, 'service-1/') || contains(github.event.head_commit.modified, '.github/workflows/')
+#    if: contains(github.event.head_commit.modified, 'service-1/') || contains(github.event.head_commit.modified, '.github/workflows/')
     uses: ./.github/workflows/buildAndDeploy.yml
     with:
       service-name: service-1
       service-directory: service-1
 
   build-deploy-service-2:
-    if: contains(github.event.head_commit.modified, 'service-2/') || contains(github.event.head_commit.modified, '.github/workflows/')
+#    if: contains(github.event.head_commit.modified, 'service-2/') || contains(github.event.head_commit.modified, '.github/workflows/')
     uses: ./.github/workflows/buildAndDeploy.yml
     with:
       service-name: service-2
       service-directory: service-2
 
   build-deploy-service-3:
-    if: contains(github.event.head_commit.modified, 'service-2/') || contains(github.event.head_commit.modified, '.github/workflows/')
+#    if: contains(github.event.head_commit.modified, 'service-2/') || contains(github.event.head_commit.modified, '.github/workflows/')
     uses: ./.github/workflows/buildAndDeploy.yml
     with:
       service-name: service-3

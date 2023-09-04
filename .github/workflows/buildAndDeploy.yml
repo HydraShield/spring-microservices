@@ -4,10 +4,10 @@ name: Workflow for Build java service and deploy docker image on ECR
 on:
   workflow_call:
     inputs:
-      service-directory:
+      service-name:
         required: true
         type: string
-      service-name:
+      service-directory:
         required: true
         type: string
 

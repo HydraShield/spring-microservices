@@ -52,12 +52,24 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build ${{ inputs.service-name }} with Maven and Push Docker Image to ECR
+      - name: Build ${{ inputs.service-name }} with Maven
+        env:
+        run: |
+          cd ${{ inputs.service-directory }}
+          mvn clean install
+
+      - name: Build ${{ inputs.service-name }} docker image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ inputs.service-name }}-latest
         run: |
           cd ${{ inputs.service-directory }}
-          mvn clean install
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
+
+      - name: ${{ inputs.service-name }} Docker Image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ inputs.service-name }}-latest
+        run: |
+          cd ${{ inputs.service-directory }}
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

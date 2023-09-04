@@ -14,6 +14,6 @@ public class HomeController {
     private String port;
     @GetMapping("hello")
     public ResponseEntity<?> hello(){
-        return ResponseEntity.ok("Hello from service 1, running on port: "+port);
+        return ResponseEntity.ok("Hello from service 1, running on port: "+port+" ;)");
     }
 }

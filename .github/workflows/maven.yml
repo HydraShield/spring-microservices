@@ -12,12 +12,6 @@ on:
   push:
   pull_request:
 
-workflows:
-  version: 2
-  my-workflow:
-    jobs:
-      - build
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -59,30 +53,30 @@ jobs:
           docker build -t hydrashield/service-3:latest -f Dockerfile .
           docker push hydrashield/service-3:latest
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Docker images for Service 1
-        run: |
-          docker build -t hydrashield/service-1:latest -f service-1/Dockerfile .
-          docker push hydrashield/service-1:latest
-
-      - name: Build and push Docker images for Service 2
-        run: |
-          docker build -t hydrashield/service-2:latest -f service-2/Dockerfile .
-          docker push hydrashield/service-2:latest
-
-      - name: Build and push Docker images for Service 3
-        run: |
-          docker build -t hydrashield/service-3:latest -f service-3/Dockerfile .
-          docker push hydrashield/service-3:latest
+#  deploy:
+#    needs: build
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v3
+#
+#      - name: Set up Docker
+#        uses: docker/setup-buildx-action@v2
+#
+#      - name: Login to Docker Hub
+#        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+#
+#      - name: Build and push Docker images for Service 1
+#        run: |
+#          docker build -t hydrashield/service-1:latest -f service-1/Dockerfile .
+#          docker push hydrashield/service-1:latest
+#
+#      - name: Build and push Docker images for Service 2
+#        run: |
+#          docker build -t hydrashield/service-2:latest -f service-2/Dockerfile .
+#          docker push hydrashield/service-2:latest
+#
+#      - name: Build and push Docker images for Service 3
+#        run: |
+#          docker build -t hydrashield/service-3:latest -f service-3/Dockerfile .
+#          docker push hydrashield/service-3:latest

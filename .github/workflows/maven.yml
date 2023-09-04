@@ -15,7 +15,7 @@ jobs:
     if: contains(github.event.head_commit.modified, 'service-1/') || contains(github.event.head_commit.modified, '.github/')
 
     steps:
-      - uses: ../common-config/common-step.yml
+      - uses: ./.github/common-config/common-step.yml
 
       - name: Build Service 1 with Maven and Push Docker Image to ECR
         env:

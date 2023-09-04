@@ -16,6 +16,10 @@ jobs:
     with:
       service-name: service-1
       service-directory: service-1
+    secrets:
+      aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
 
   build-deploy-service-2:
 #    if: contains(github.event.head_commit.modified, 'service-2/') || contains(github.event.head_commit.modified, '.github/workflows/')
@@ -23,6 +27,10 @@ jobs:
     with:
       service-name: service-2
       service-directory: service-2
+    secrets:
+      aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
 
   build-deploy-service-3:
 #    if: contains(github.event.head_commit.modified, 'service-2/') || contains(github.event.head_commit.modified, '.github/workflows/')
@@ -30,3 +38,7 @@ jobs:
     with:
       service-name: service-3
       service-directory: service-3
+    secrets:
+      aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}

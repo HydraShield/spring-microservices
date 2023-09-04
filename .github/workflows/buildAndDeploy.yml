@@ -10,6 +10,13 @@ on:
       service-directory:
         required: true
         type: string
+    secrets:
+      aws_access_key_id:
+        required: true
+      aws_secret_access_key:
+        required: true
+      aws_session_token:
+        required: true
 
 env:
   AWS_REGION: us-east-1
@@ -26,9 +33,9 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-access-key-id: ${{ secrets.aws_access_key_id }}
+          aws-secret-access-key: ${{ secrets.aws_secret_access_key }}
+          aws-session-token: ${{ secrets.aws_session_token }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR

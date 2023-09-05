@@ -73,7 +73,7 @@ fargate:
               HostPort: 8081
     service-3-fargate-task:
       name: service-3-fargate-task
-      image: service-2
+      image: service-3
       memory: '1 GB'
       cpu: 512
       vpc:

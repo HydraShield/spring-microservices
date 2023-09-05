@@ -10,17 +10,6 @@ on:
       service-directory:
         required: true
         type: string
-    secrets:
-      aws_access_key_id:
-        required: true
-      aws_secret_access_key:
-        required: true
-      aws_session_token:
-        required: true
-
-env:
-  AWS_REGION: us-east-1
-  ECR_REPOSITORY: microservice
 
 jobs:
   build:

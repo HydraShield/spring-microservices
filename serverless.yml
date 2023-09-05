@@ -1,0 +1,92 @@
+service: microservices-fargate
+
+plugins:
+  - serverless-fargate
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: us-east-1
+  ecr:
+    images:
+      service-1:
+        path: ./service-1/
+        file: Dockerfile
+      service-2:
+        path: ./service-2/
+        file: Dockerfile
+      service-3:
+        path: ./service-3/
+        file: Dockerfile
+
+fargate:
+  clusterName: microservices-fargate-cluster
+  containerInsights: true
+  memory: '4 GB'
+  cpu: 2048
+  architecture: X86_64
+  vpc:
+    assignPublicIp: true
+    securityGroupIds:
+      - sg-006f415a1d30d62d1
+    subnetIds:
+      - subnet-0cb2c1303b4628af8
+  tasks:
+    service-1-fargate-task:
+      name: service-1-fargate-task
+      image: service-1
+      memory: '1 GB'
+      cpu: 512
+      vpc:
+        securityGroupIds:
+          - sg-006f415a1d30d62d1
+        subnetIds:
+          - subnet-0cb2c1303b4628af8
+        assignPublicIp: true
+      service:
+        desiredCount: 1
+        maximumPercent: 200
+      cloudFormationResource:
+        container:
+          PortMappings:
+            - ContainerPort: 8080
+              HostPort: 8080
+    service-2-fargate-task:
+      name: service-2-fargate-task
+      image: service-2
+      memory: '1 GB'
+      cpu: 512
+      vpc:
+        securityGroupIds:
+          - sg-006f415a1d30d62d1
+        subnetIds:
+          - subnet-0cb2c1303b4628af8
+        assignPublicIp: true
+      service:
+        desiredCount: 1
+        maximumPercent: 200
+      cloudFormationResource:
+        container:
+          PortMappings:
+            - ContainerPort: 8081
+              HostPort: 8081
+    service-3-fargate-task:
+      name: service-3-fargate-task
+      image: service-3
+      memory: '1 GB'
+      cpu: 512
+      vpc:
+        securityGroupIds:
+          - sg-006f415a1d30d62d1
+        subnetIds:
+          - subnet-0cb2c1303b4628af8
+        assignPublicIp: true
+      service:
+        desiredCount: 1
+        maximumPercent: 200
+      cloudFormationResource:
+        container:
+          PortMappings:
+            - ContainerPort: 8082
+              HostPort: 8082

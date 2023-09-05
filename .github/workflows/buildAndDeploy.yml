@@ -23,7 +23,7 @@ env:
   ECR_REPOSITORY: microservice
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:

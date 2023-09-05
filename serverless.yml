@@ -88,5 +88,5 @@ fargate:
       cloudFormationResource:
         container:
           PortMappings:
-            - ContainerPort: 8081
-              HostPort: 8081
+            - ContainerPort: 8082
+              HostPort: 8082
